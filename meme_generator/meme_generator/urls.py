@@ -22,13 +22,15 @@ from api.views import (
     MemeCreateView,
     MemeRetrieveView,
     MemeRateView,
+    TopMemesView,
 )
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/templates/', MemeTemplateListView.as_view(), name='meme-template-list'),  # Add this line
+    path('api/templates/', MemeTemplateListView.as_view(), name='meme-template-list'), 
     path('api/memes/', MemeListView.as_view(), name='meme-list'),
     path('api/memes/create/', MemeCreateView.as_view(), name='meme-create'),
     path('api/memes/<int:pk>/', MemeRetrieveView.as_view(), name='meme-detail'),
     path('api/memes/rate/', MemeRateView.as_view(), name='meme-rate'),
+    path('api/memes/top/', TopMemesView.as_view(), name='top-memes'),
 ]
