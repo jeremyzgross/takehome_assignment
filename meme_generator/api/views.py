@@ -4,6 +4,7 @@ from rest_framework.permissions import IsAuthenticated
 from .models import MemeTemplate, Meme, Rating
 from .serializers import MemeTemplateSerializer, MemeSerializer, RatingSerializer
 from django.contrib.auth.models import User
+from django.db.models import Avg
 
 class MemeTemplateListView(generics.ListAPIView):
     queryset = MemeTemplate.objects.all()
@@ -39,6 +40,7 @@ class RandomMemeView(generics.ListAPIView):
 
     def get_queryset(self):
         return Meme.objects.order_by('?').first()
+
 
 class TopMemesView(generics.ListAPIView):
     queryset = Meme.objects.all()
