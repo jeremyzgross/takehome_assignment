@@ -16,7 +16,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from api.views import (
+    MemeTemplateListView,
+    MemeListView,
+    MemeCreateView,
+    MemeRetrieveView,
+    MemeRateView,
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/templates/', MemeTemplateListView.as_view(), name='meme-template-list'),  # Add this line
+    path('api/memes/', MemeListView.as_view(), name='meme-list'),
+    path('api/memes/create/', MemeCreateView.as_view(), name='meme-create'),
+    path('api/memes/<int:pk>/', MemeRetrieveView.as_view(), name='meme-detail'),
+    path('api/memes/rate/', MemeRateView.as_view(), name='meme-rate'),
 ]
