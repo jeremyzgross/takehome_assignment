@@ -33,5 +33,16 @@ class MemeRateView(generics.CreateAPIView):
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
+class RandomMemeView(generics.ListAPIView):
+    queryset = Meme.objects.all()
+    serializer_class = MemeSerializer
 
+    def get_queryset(self):
+        return Meme.objects.order_by('?').first()
 
+class TopMemesView(generics.ListAPIView):
+    queryset = Meme.objects.all()
+    serializer_class = MemeSerializer
+
+    def get_queryset(self):
+        return Meme.objects.annotate(average_rating=Avg('ratings__score')).order_by('-average_rating')[:10]
