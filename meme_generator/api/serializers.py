@@ -15,3 +15,4 @@ class RatingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Rating
         fields = ['id', 'meme', 'user', 'score', 'created_at']
+        read_only_fields = ['user', 'created_at']  # User should be set automatically

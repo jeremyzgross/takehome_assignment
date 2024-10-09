@@ -31,6 +31,6 @@ urlpatterns = [
     path('api/memes/', MemeListView.as_view(), name='meme-list'),
     path('api/memes/create/', MemeCreateView.as_view(), name='meme-create'),
     path('api/memes/<int:pk>/', MemeRetrieveView.as_view(), name='meme-detail'),
-    path('api/memes/rate/', MemeRateView.as_view(), name='meme-rate'),
+       path('api/memes/<int:id>/rate/', MemeRateView.as_view(), name='meme-rate'),
     path('api/memes/top/', TopMemesView.as_view(), name='top-memes'),
 ]

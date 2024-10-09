@@ -31,8 +31,24 @@ class MemeRateView(generics.CreateAPIView):
     serializer_class = RatingSerializer
     permission_classes = [IsAuthenticated]
 
-    def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+    def post(self, request, id):
+        # Get the meme object
+        try:
+            meme = Meme.objects.get(id=id)
+        except Meme.DoesNotExist:
+            return Response({"detail": "Meme not found."}, status=status.HTTP_404_NOT_FOUND)
+
+        # Get the score from the request data
+        score = request.data.get('score')
+
+        # Validate the score
+        if score is None or score < 1 or score > 5:
+            return Response({"detail": "Invalid score. Must be between 1 and 5."}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Create the rating
+        rating = Rating.objects.create(meme=meme, user=request.user, score=score)
+
+        return Response({"detail": "Rating created successfully.", "rating": RatingSerializer(rating).data}, status=status.HTTP_201_CREATED)
 
 class RandomMemeView(generics.ListAPIView):
     queryset = Meme.objects.all()
