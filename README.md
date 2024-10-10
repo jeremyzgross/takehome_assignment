@@ -34,7 +34,7 @@ The Meme Generator API is a RESTful service built using Django and PostgreSQL. I
    ```bash
    docker-compose up --build
    ```
-
+4. Unless a superuser exists, one will be created with the username 'admin' and email 'admin@test.com' and the password 'admin123'.
 ## API Endpoints
 
 ### 1. List all meme templates
