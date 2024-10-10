@@ -15,7 +15,7 @@ The Meme Generator API is a RESTful service built using Django and PostgreSQL. I
 1. Clone the repository:
 
    ```bash
-   git clone <repository-url>
+   git clone
    cd meme_generator
    ```
 
